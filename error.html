@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | STACKLY</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#c9a04e;--gold-2:#e0b96a;
+  --gold-grad:linear-gradient(135deg,#e0b96a,#c9a04e,#a07830);
+  --bg-0:#0a0a0f;--bg-1:#0f0f16;
+  --surface:#17171f;
+  --txt:#f0ede6;--txt-soft:#a09888;--txt-dim:#6a6258;
+  --line:rgba(201,160,78,.14);
+  --font-display:'Playfair Display',serif;--font-body:'Inter',sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg-0);color:var(--txt);font-family:var(--font-body);
+  min-height:100vh;overflow-x:hidden;
+  display:flex;flex-direction:column;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+
+.grain{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+.container{max-width:1280px;margin:0 auto;padding:0 48px;width:100%;}
+
+/* ─── NAV (minimal) ─── */
+.nav{padding:24px 0;}
+.nav .container{display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{height:34px;width:auto;max-width:170px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45));}
+.nav-logo-fallback{font-family:var(--font-display);font-size:1.3rem;letter-spacing:.12em;background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:none;}
+.nav-back-link{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--txt-soft);display:flex;align-items:center;gap:8px;transition:color .3s;background:none;border:none;cursor:pointer;font-family:var(--font-body);}
+.nav-back-link:hover{color:var(--gold);}
+.nav-back-link svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+.nav-back-link:hover svg{transform:translateX(-3px);}
+
+/* ─── MAIN ─── */
+main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;padding:40px 24px 80px;}
+main::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,160,78,.1),transparent 70%);
+  filter:blur(40px);z-index:0;
+}
+.error-wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:560px;}
+
+/* Stopped watch illustration */
+.stopped-watch{position:relative;margin-bottom:44px;}
+.watch-case{
+  width:220px;height:220px;border-radius:50%;
+  background:conic-gradient(from 45deg,#2a2a32,#4a4a55,#1c1c22,#3a3a44,#2a2a32);
+  padding:12px;
+  box-shadow:0 30px 80px rgba(0,0,0,.7),inset 0 0 24px rgba(0,0,0,.5),0 0 0 1px rgba(201,160,78,.15);
+}
+.watch-bezel{width:100%;height:100%;border-radius:50%;padding:10px;background:linear-gradient(145deg,#c9a04e,#8a6a28);}
+.watch-dial{
+  width:100%;height:100%;border-radius:50%;position:relative;
+  background:radial-gradient(circle at 40% 35%,#0e1c2a,#060c14 70%);
+  box-shadow:inset 0 0 40px rgba(0,0,0,.8);
+  display:flex;align-items:center;justify-content:center;
+}
+.dial-404{
+  font-family:var(--font-display);font-weight:600;font-size:2.1rem;letter-spacing:.03em;
+  background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;z-index:2;
+}
+.hand{position:absolute;bottom:50%;left:50%;transform-origin:bottom;border-radius:3px;}
+.hand-h{width:4px;height:44px;background:var(--gold-2);transform:translateX(-50%) rotate(112deg);opacity:.55;}
+.hand-m{width:2.5px;height:66px;background:#e8e6df;transform:translateX(-50%) rotate(4deg);opacity:.55;}
+.pivot{position:absolute;top:50%;left:50%;width:8px;height:8px;background:var(--gold-2);border-radius:50%;transform:translate(-50%,-50%);z-index:3;opacity:.7;}
+.tick{position:absolute;width:2px;height:10px;background:var(--gold-2);border-radius:2px;opacity:.5;}
+.t12{top:8px;left:50%;transform:translateX(-50%);}
+.t6{bottom:8px;left:50%;transform:translateX(-50%);}
+.t3{right:8px;top:50%;transform:translateY(-50%) rotate(90deg);}
+.t9{left:8px;top:50%;transform:translateY(-50%) rotate(90deg);}
+/* cracked glass */
+.crack{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.5;}
+
+.eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px;}
+.error-wrap h1{
+  font-family:var(--font-display);font-weight:600;
+  font-size:clamp(1.9rem,4.2vw,2.7rem);line-height:1.2;
+  margin-bottom:18px;
+}
+.error-wrap p{color:var(--txt-soft);font-size:1rem;line-height:1.8;max-width:440px;margin-bottom:40px;}
+
+.error-actions{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border-radius:50px;
+  font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+  transition:all .4s var(--ease);cursor:pointer;border:none;white-space:nowrap;
+  font-family:var(--font-body);
+}
+.btn-gold{background:var(--gold-grad);color:#1a1407;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,160,78,.35);}
+.btn-ghost{background:transparent;color:var(--txt);border:1px solid rgba(255,255,255,.2);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.arrow{transition:transform .3s;}
+.btn:hover .arrow{transform:translateX(4px);}
+.btn:hover .arrow.arrow-left{transform:translateX(-4px);}
+
+.error-code{
+  font-family:var(--font-body);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--txt-dim);margin-top:48px;
+}
+
+/* ─── FOOTER (minimal) ─── */
+.footer-min{border-top:1px solid var(--line);padding:24px 0;}
+.footer-min .container{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--txt-dim);flex-wrap:wrap;gap:8px;}
+
+/* ─── REVEAL ─── */
+[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+[data-reveal].visible{opacity:1;transform:translateY(0);}
+[data-reveal][data-delay="1"]{transition-delay:.12s;}
+[data-reveal][data-delay="2"]{transition-delay:.24s;}
+[data-reveal][data-delay="3"]{transition-delay:.36s;}
+
+@media(max-width:640px){
+  .container{padding:0 20px;}
+  .nav{padding:20px 0;}
+  main{padding:20px 20px 60px;}
+  .watch-case{width:180px;height:180px;}
+  .dial-404{font-size:1.7rem;}
+  .error-actions{flex-direction:column;width:100%;}
+  .error-actions .btn{width:100%;justify-content:center;}
+  .footer-min .container{flex-direction:column;text-align:center;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <img src="./stackly-removebg-preview.png" alt="STACKLY"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="nav-logo-fallback">STACKLY</span>
+    </a>
+    <button class="nav-back-link" onclick="goBack()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Back
+    </button>
+  </div>
+</nav>
+
+<main>
+  <div class="error-wrap">
+    <div class="stopped-watch" data-reveal>
+      <div class="watch-case">
+        <div class="watch-bezel">
+          <div class="watch-dial">
+            <div class="hand hand-h"></div>
+            <div class="hand hand-m"></div>
+            <div class="pivot"></div>
+            <div class="tick t12"></div><div class="tick t3"></div>
+            <div class="tick t6"></div><div class="tick t9"></div>
+            <span class="dial-404">404</span>
+            <svg class="crack" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+              <path d="M112 20 L118 70 L100 95 L130 120 L108 150 L122 200" stroke="rgba(240,237,230,.35)" stroke-width="1" fill="none"/>
+              <path d="M118 70 L155 85" stroke="rgba(240,237,230,.25)" stroke-width="1" fill="none"/>
+              <path d="M100 95 L60 105" stroke="rgba(240,237,230,.25)" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span class="eyebrow" data-reveal data-delay="1">Error 404</span>
+    <h1 data-reveal data-delay="1">This Watch Has Stopped</h1>
+    <p data-reveal data-delay="2">The page you're searching for has been discontinued, mislaid, or perhaps never existed at all — much like a timepiece whose movement has simply run out. Let's get you back on schedule.</p>
+
+    <div class="error-actions" data-reveal data-delay="3">
+      <button class="btn btn-ghost" onclick="goBack()">
+        <span class="arrow arrow-left">←</span> Go Back
+      </button>
+      <a href="index.html" class="btn btn-gold">
+        Return Home <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <span class="error-code" data-reveal data-delay="3">ERR_404 · PAGE_NOT_FOUND</span>
+  </div>
+</main>
+
+<!-- <footer class="footer-min">
+  <div class="container">
+    <span>© 2026 STACKLY Maison Horlogère. All rights reserved.</span>
+    <span>Geneva, Switzerland</span>
+  </div>
+</footer> -->
+<script>
+function goBack(){
+  if (document.referrer && window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); ro.unobserve(e.target); } });
+},{threshold:0.1});
+document.querySelectorAll('[data-reveal]').forEach(el=>ro.observe(el));
+
+// Reveal immediately on load since this page has no scroll
+window.addEventListener('load',()=>{
+  document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('visible'));
+});
+</script>
+
+</body>
+</html>
